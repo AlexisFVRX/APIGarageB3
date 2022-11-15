@@ -19,5 +19,5 @@ module.exports = {
 
 module.exports = {
     instance,
-    users: require('./reviews')(instance)
+    users: require('./employees')(instance)
 };
