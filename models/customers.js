@@ -1,3 +1,6 @@
+const { DataTypes } = require('sequelize');
+const { database } = require('../db.config');
+
 module.exports = (instance) => {
     return instance.define('customers', {
         id: {

@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 const carsRouter = require('./routers/carsRouter');
-app.use('/books', carsRouter);
+app.use('/cars', carsRouter);
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)

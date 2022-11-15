@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { database } = require('./db.config');
+const { database } = require('../db.config');
 
 module.exports = (instance) => {
     return instance.define('cars', {
