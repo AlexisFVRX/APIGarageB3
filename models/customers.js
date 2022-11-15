@@ -20,7 +20,7 @@ module.exports = (instance) => {
         },
 
         email: {
-            type: DataTypes.FLOAT,
+            type: DataTypes.STRING,
             default: null
         }
 
