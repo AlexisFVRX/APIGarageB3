@@ -18,8 +18,8 @@ exports.getCarById = async (req, res, next) => {
 }
 
 exports.addCar = async (req, res, next) => {
-   if (req.body && req.body.title && req.body.date) {
-      const carCreated = await carsService.addCar(req.body.title, req.body.date);
+   if (req.body && req.body.mark && req.body.model && req.body.price) {
+      const carCreated = await carsService.addCar(req.body.mark, req.body.model, req.body.price);
       if (carCreated) {
          res.status(201).json({success: true, id: carCreated.id});
       } else {

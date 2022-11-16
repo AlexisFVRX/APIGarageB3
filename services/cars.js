@@ -12,8 +12,8 @@ exports.getCarsById = (id) => {
     });
 }
 
-exports.addCar = (id, mark, model, price) => {
-    return db.cars.create({id, mark, model, price});
+exports.addCar = (mark, model, price) => {
+    return db.cars.create({mark, model, price});
 }
 
 exports.deleteCarById = (id) => {
