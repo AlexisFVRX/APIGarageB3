@@ -1,4 +1,4 @@
-const customersService = require('../services/employees');
+const employeesService = require('../services/employees');
 const createError = require('http-errors');
 
 exports.getEmployees = async (req, res) => {
