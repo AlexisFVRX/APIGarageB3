@@ -9,9 +9,9 @@ app.use(express.json());
 const carsRouter = require('./routers/carsRouter');
 app.use('/cars', carsRouter);
 const customersRouter = require('./routers/customersRouter');
-app.use('/customers', carsRouter);
+app.use('/customers', customersRouter);
 const employeesRouter = require('./routers/employeesRouter');
-app.use('/employees', carsRouter);
+app.use('/employees', employeesRouter);
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
