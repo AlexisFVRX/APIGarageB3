@@ -9,15 +9,7 @@ const instance = new Sequelize(dbConfig.database, dbConfig.username, dbConfig.pa
 
 module.exports = {
     instance,
-    users: require('./cars')(instance)
-};
-
-module.exports = {
-    instance,
-    users: require('./customers')(instance)
-};
-
-module.exports = {
-    instance,
-    users: require('./employees')(instance)
+    cars: require('./cars')(instance),
+    customers: require('./customers')(instance),
+    employees: require('./employees')(instance)
 };
