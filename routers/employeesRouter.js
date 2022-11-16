@@ -8,11 +8,11 @@ const express = require('express'),
 
 router.get('/', employeesController.getEmployees);
 
-router.get('/:id', employeesController.getEmployeeById);
+router.get('/:id', employeesController.getEmployeeByMatricule);
 
 router.post('/', employeesController.addEmployee);
 
-router.delete('/:id', employeesController.deleteEmployeeById);
+router.delete('/:id', employeesController.deleteEmployeeByMatricule);
 
 
 
