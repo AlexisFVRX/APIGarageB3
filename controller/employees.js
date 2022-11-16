@@ -9,7 +9,7 @@ exports.getEmployees = async (req, res) => {
 
 exports.getEmployeeByMatricule = async (req, res, next) => {
    let employeeMatricule = parseInt(req.params.matricule); // We are sure here by using validator that we have a valid number, we can parseInt
-   const employees = await employeeService.getEmployeeById(employeeMatricule);
+   const employees = await employeesService.getEmployeeByMatricule(employeeMatricule);
    if (employees && employees.length === 1) {
       res.json({success: true, data: employees[0]});
    } else {
@@ -35,7 +35,7 @@ exports.deleteEmployeeByMatricule = async (req, res, next) => {
       const matricule = parseInt(req.params.matricule);
       const employees = await employeesService.getEmployeeByMatricule(matricule);
       if (employees.length === 1) {
-         const nbOfDeletion = await customersService.deleteEmployeeByMatricule(matricule);
+         const nbOfDeletion = await employeesService.deleteEmployeeByMatricule(matricule);
          if (nbOfDeletion === 1) {
             res.json({success: true});
          } else {

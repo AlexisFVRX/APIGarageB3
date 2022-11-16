@@ -33,7 +33,7 @@ exports.addCar = async (req, res, next) => {
 exports.deleteCarById = async (req, res, next) => {
    if (req.params.id) {
       const id = parseInt(req.params.id);
-      const cars = await booksService.getCarById(id);
+      const cars = await carsService.getCarById(id);
       if (cars.length === 1) {
          const nbOfDeletion = await carsService.deleteCarById(id);
          if (nbOfDeletion === 1) {
