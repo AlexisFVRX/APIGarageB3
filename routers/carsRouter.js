@@ -2,7 +2,7 @@ const express = require('express'),
 
       router = express.Router(),
 
-      carsController = require('../controller/cars.js');
+      carsController = require('../controller/cars');
 
 
 

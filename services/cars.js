@@ -4,7 +4,7 @@ exports.getCars = () => {
     return db.cars.findAll();
 }
 
-exports.getCarsById = (id) => {
+exports.getCarById = (id) => {
     return db.cars.findAll({
         where: {
             id
