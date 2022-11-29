@@ -12,6 +12,8 @@ router.get('/:id', customersController.getCustomerById);
 
 router.post('/', customersController.addCustomer);
 
+router.patch('/:id', customersController.updateCustomer);
+
 router.delete('/:id', customersController.deleteCustomerById);
 
 

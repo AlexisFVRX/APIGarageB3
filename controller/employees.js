@@ -30,6 +30,19 @@ exports.addEmployee = async (req, res, next) => {
    }
 }
 
+
+exports.updateEmployee= function updateEmployee(firstname, lastname, email) {
+   if (firstname != null && lastname != null && email != null) {
+       const customer = this.getEmployeeByMatricule(matricule);
+       customer.firstname = firstname;
+       customer.lastname = lastname;
+       customer.email = email;
+       return car;
+   } else {
+       throw new Error('All parameters are required');
+   }
+}
+
 exports.deleteEmployeeByMatricule = async (req, res, next) => {
    if (req.params.matricule) {
       const matricule = parseInt(req.params.matricule);
