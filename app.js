@@ -5,6 +5,11 @@ const OpenApiValidator = require('express-openapi-validator');
 
 app.use(cors());
 app.use(express.json());
+//app.use(
+   // OpenApiValidator.middleware({
+       // apiSpec: './open-api.yaml'
+   // })
+//);
 
 const carsRouter = require('./routers/carsRouter');
 app.use('/cars', carsRouter);
