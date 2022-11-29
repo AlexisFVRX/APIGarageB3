@@ -16,6 +16,10 @@ exports.addEmployee = (lastname, firstname, email) => {
     return db.employees.create({lastname, firstname, email});
 }
 
+exports.updateEmployee = (lastname, firstname, email) => {
+    return db.employees.create({lastname, firstname, email});
+}
+
 exports.deleteEmployeeByMatricule = (matricule) => {
     return db.employees.destroy({
         where: {

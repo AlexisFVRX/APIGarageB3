@@ -16,6 +16,9 @@ exports.addCustomer = (lastname, firstname, email) => {
     return db.customers.create({lastname, firstname, email});
 }
 
+exports.updateCustomer = (lastname, firstname, email) => {
+    return db.cars.create({lastname, firstname, email});
+}
 
 exports.deleteCustomerById = (id) => {
     return db.customers.destroy({

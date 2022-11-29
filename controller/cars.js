@@ -31,8 +31,9 @@ exports.addCar = async (req, res, next) => {
 }
 
 exports.updateCar= function updateCar(mark, model, price) {
-   if (mark != null && model != null && price != null) {
+   if (id != null && mark != null && model != null && price != null) {
        const car = this.getCarById(id);
+       car.id = id;
        car.mark = mark;
        car.model = model;
        car.price = price;
