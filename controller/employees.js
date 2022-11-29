@@ -31,13 +31,17 @@ exports.addEmployee = async (req, res, next) => {
 }
 
 
-exports.updateEmployee= function updateEmployee(firstname, lastname, email) {
-   if (firstname != null && lastname != null && email != null) {
-       const customer = this.getEmployeeByMatricule(matricule);
-       customer.firstname = firstname;
-       customer.lastname = lastname;
-       customer.email = email;
-       return car;
+exports.updateEmployee = async (req, res, next) => {
+   if (req.params.matricule && req.body.firstname != null && req.body.lastname != null && req.body.email != null) {
+       const employee = await employeesService.getEmployeeByMatricule(req.params.matricule);
+       let firstname, lastname, email;
+       employee.map(async(empl)=>{
+         req.body.firstname ? firstname = req.body.firstname : firstname = empl.dataValues.firstname;
+         req.body.lastname ? lastname = req.body.lastname : lastname = empl.dataValues.lastname;
+         req.body.email ? email = req.body.email : email = empl.dataValues.email;
+       })
+       employeesService.updateEmployee(req.params.matricule, firstname, lastname, email);
+       res.json({success : true});
    } else {
        throw new Error('All parameters are required');
    }

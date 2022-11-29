@@ -30,13 +30,17 @@ exports.addCustomer = async (req, res, next) => {
    }
 }
 
-exports.updateCustomer= function updateCustomer(firstname, lastname, email) {
-   if (firstname != null && lastname != null && email != null) {
-       const customer = this.getCustomerById(id);
-       customer.firstname = firstname;
-       customer.lastname = lastname;
-       customer.email = email;
-       return car;
+exports.updateCustomer = async (req, res, next) => {
+   if (req.params.id && req.body.firstname != null && req.body.lastname != null && req.body.email != null) {
+       const customer = await customersService.getCustomerById(req.params.id);
+       let firstname, lastname, email;
+       customer.map(async(cust)=>{
+         req.body.firstname ? firstname = req.body.firstname : firstname = cust.dataValues.firstname;
+         req.body.lastname ? lastname = req.body.lastname : lastname = cust.dataValues.lastname;
+         req.body.email ? email = req.body.email : email = cust.dataValues.email;
+       })
+       customersService.updateCustomer(req.params.id, firstname, lastname, email);
+       res.json({success : true});
    } else {
        throw new Error('All parameters are required');
    }

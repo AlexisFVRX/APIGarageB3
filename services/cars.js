@@ -16,10 +16,17 @@ exports.addCar = (mark, model, price) => {
     return db.cars.create({mark, model, price});
 }
 
-exports.updateCar = (mark, model, price) => {
-    return db.cars.create({mark, model, price});
-}
+exports.updateCar = async (id, mark, model, price) => {
+    return await db.cars.update({
+        mark: mark,
+        model: model,
+        price: price,
+    },
+    {
+        where: {id : id}
+    });
 
+}
 
 exports.deleteCarById = (id) => {
     return db.cars.destroy({

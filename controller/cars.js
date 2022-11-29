@@ -30,14 +30,17 @@ exports.addCar = async (req, res, next) => {
    }
 }
 
-exports.updateCar= function updateCar(mark, model, price) {
-   if (id != null && mark != null && model != null && price != null) {
-       const car = this.getCarById(id);
-       car.id = id;
-       car.mark = mark;
-       car.model = model;
-       car.price = price;
-       return car;
+exports.updateCar = async (req, res, next) => {
+   if (req.params.id && req.body.mark != null && req.body.model != null && req.body.price != null) {
+       const car = await carsService.getCarById(req.params.id);
+       let mark, model, price;
+       car.map(async(c)=>{
+         req.body.mark ? mark = req.body.mark : mark = c.dataValues.mark;
+         req.body.model ? model = req.body.model : model = c.dataValues.model;
+         req.body.price ? price = req.body.price : price = c.dataValues.price;
+       })
+       carsService.updateCar(req.params.id, mark, model, price);
+       res.json({success : true});
    } else {
        throw new Error('All parameters are required');
    }
