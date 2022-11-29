@@ -1,0 +1,412 @@
+openapi: 3.0.3
+info:
+  title: Cars API
+  description: This API manage a cars store
+  contact:
+    email: alexis.favereaux@ynov.com
+  version: 1.0.0
+servers:
+  - url: "{protocol}://{server}"
+    variables:
+      protocol:
+        enum:
+          - http
+          - https
+        default: http
+      server:
+        default: localhost:3000
+tags:
+  - name: cars
+    description: Everything about cars on sale
+  - name: customers
+    description: Everything about customers account
+  - name: employees
+    description: Everything about employees account
+paths:
+  /cars:
+    get:
+      tags:
+        - cars
+      summary: Get all cars on sale
+      description: Return all cars available on sale
+      operationId: getCars
+      responses:
+        "200":
+          description: cars fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cars"
+        "500":
+          $ref: "#/components/responses/InternalServerError"
+    post:
+      tags:
+        - cars
+      summary: Add a new car to the store
+      operationId: addCar
+      responses:
+        "200":
+          description: car created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+        "400":
+          $ref: "/InvalidBody"
+        "500":
+          $ref: "/InvalidBody"
+  /cars/{id}:
+    get:
+      tags:
+        - cars
+      summary: Get a car by its id
+      operationId: getCarById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+        "404":
+          $ref: "/NotFound"
+    delete:
+      tags:
+        - cars
+      summary: delete a car by its id
+      operationId: deleteCarById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car deletesuccessfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+        "404":
+          $ref: "/NotFound"
+    patch:
+      tags:
+        - cars
+      summary: update a car by its id
+      operationId: updateCar
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Car update successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/car"
+    
+  /customers:
+    get:
+      tags:
+        - customers
+      summary: Get all customers informations
+      description: Return all customers informations
+      operationId: getCustomers
+      responses:
+        "200":
+          description: customers fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customers'
+          
+    post:
+      tags:
+        - customers
+      summary: new customers
+      description: add new customers
+      operationId: addCustomer
+      responses:
+        "200":
+          description: customers added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/customer'
+  /customers/{id}:
+    get:
+      tags:
+        - customers
+      summary: get customers by its id
+      operationId: getCustomerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: customers get successfully
+    patch:
+      tags:
+        - customers
+      summary: update customers by id
+      operationId: updateCustomer
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: customers update successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/customer"
+        "404":
+          $ref: "/NotFound"
+    delete:
+      tags:
+        - customers
+      summary: delete a customer by its id
+      operationId: deleteCustomerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Customer delete successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/customer"
+        "404":
+          $ref: "/NotFound"
+  /employees:
+    get:
+      tags:
+        - employees
+      summary: Get all employees informations
+      description: Return all employees informations
+      operationId: getEmployees
+      responses:
+        "200":
+          description: Employees fetched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employees'
+    post:
+      tags:
+        - employees
+      summary: New employees
+      description: Create new employees
+      operationId: addEmployee
+      responses:
+        "200":
+          description: Employee created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/employee'
+                
+                
+  /employees/{matricule}:
+    get:
+      tags:
+        - employees
+      summary: get employees by its matrciule
+      operationId: getEmployeeByMatricule
+      parameters:
+        - name: matricule
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Employees get successfully
+    patch:
+      tags:
+        - employees
+      summary: update employees by matricule
+      operationId: updateEmployee
+      parameters:
+        - name: matricule
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: employees update successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/employee"
+        "404":
+          $ref: "/NotFound"
+    delete:
+      tags:
+        - employees
+      summary: delete a employees by its matricule
+      operationId: deleteEmployeeByMatricule
+      parameters:
+        - name: matricule
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Employee delete successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/employee"
+        "404":
+          $ref: "/NotFound"
+    
+components:
+  schemas:
+    cars:
+      type: array
+      items: 
+        $ref: '#/components/schemas/car'
+    car:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        mark:
+          type: string
+          example: "BMW"
+        Model:
+          type: string
+        Price: 
+          type: integer
+          example: 10000
+    customers:
+      type: array
+      items:
+        $ref: '#/components/schemas/customers'
+    customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        lastname:
+          type: string
+          example: "KAZAR"
+        firstname:
+          type: string
+          example: "TOTO"
+        email: 
+          type: string
+          example: "toto@gmail.com"
+    employees:
+      type: array
+      items:
+        $ref: '#/components/schemas/employees'
+    employee:
+      type: object
+      items:
+        $ref: '#/components/schemas/employee'
+        properties:
+          matricule:
+            type: integer
+            example: 1
+          lastname:
+            type: string
+            example: "TOTO"
+          firstname:
+            type: string
+            example: "KAZAR"
+          email: 
+            type: string
+            example: "toto@gmail.com"
+          
+          
+  requestBodies:
+    CarModification:
+      content:
+        application/json:
+          schema:
+            properties:
+              mark:
+                type: string
+              model:
+                type: string
+              firstname:
+                type: string
+              lastname:
+                type: string
+              email:
+                type: string
+  responses:
+    NotFound:
+      description: "The ressource specified is not found"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: ""
+                example: "This ressource with this id is not found"
+    InvalidBody:
+      description: "The body sent to the request is invalid"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: ""
+                example: "Please make sure that all args on the body are ok"
+    InternalServerError:
+      description: "An internal server error occurred"
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [ success, message ]
+            properties:
+              success:
+                type: boolean
+                default: false
+                example: false
+              message:
+                type: string
+                default: "An unknown server error occurred"
+                example: "An unknown server error occurred"
