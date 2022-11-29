@@ -30,12 +30,12 @@ exports.addCustomer = async (req, res, next) => {
    }
 }
 
-exports.updateCar= function updateCar(mark, model, price) {
-   if (mark != null && model != null && price != null) {
-       const car = this.getCarById(id);
-       car.mark = mark;
-       car.model = model;
-       car.price = price;
+exports.updateCustomer= function updateCustomer(firstname, lastname, email) {
+   if (firstname != null && lastname != null && email != null) {
+       const customer = this.getCustomerById(id);
+       customer.firstname = firstname;
+       customer.lastname = lastname;
+       customer.email = email;
        return car;
    } else {
        throw new Error('All parameters are required');
