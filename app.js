@@ -17,6 +17,8 @@ const customersRouter = require('./routers/customersRouter');
 app.use('/customers', customersRouter);
 const employeesRouter = require('./routers/employeesRouter');
 app.use('/employees', employeesRouter);
+const carsAPIExterne = require('./routers/carsAPIExterneRouter')
+app.use('/carsAPIExterne', carsAPIExterne)
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500)
